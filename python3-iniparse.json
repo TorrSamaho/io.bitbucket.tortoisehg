@@ -1,0 +1,14 @@
+{
+    "name": "python3-iniparse",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"iniparse\" --no-build-isolation"
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/5f/b0/4d357324948188e76154b332e119fb28e374c1ebe4d4f6bca729aaa44309/iniparse-0.5-py3-none-any.whl",
+            "sha256": "db6ef1d8a02395448e0e7b17ac0aa28b8d338b632bbd1ffca08c02ddae32cf97"
+        }
+    ]
+}

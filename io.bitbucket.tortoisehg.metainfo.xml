@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.bitbucket.tortoisehg</id>
+  <name>TortoiseHg</name>
+  <project_license>GPL-2.0+</project_license>
+  <summary>TortoiseHg is a set of graphical tools and a shell extension for the Mercurial distributed revision control system.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <developer>
+    <name>Steve Borho and others</name>
+  </developer>
+  <description>
+    <p>TortoiseHg is a Windows shell extension and a series of applications for the Mercurial distributed revision control system. It also includes a Gnome/Nautilus extension and a CLI wrapper application so the TortoiseHg tools can be used on non-Windows platforms.</p>
+  </description>
+  <launchable type="desktop-id">io.bitbucket.tortoisehg.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Workbench</caption>
+      <image>https://tortoisehg.bitbucket.io/img/vt_history.png</image>
+    </screenshot>
+  </screenshots>
+  <branding>
+    <color type="primary">#0082c9</color>
+  </branding>
+  <url type="homepage">https://tortoisehg.bitbucket.io/</url>
+  <releases>
+    <release version="6.6.3" date="2024-02-13"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>

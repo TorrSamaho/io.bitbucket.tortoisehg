@@ -1,0 +1,14 @@
+{
+    "name": "python3-hg-evolve",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"hg-evolve\" --no-build-isolation"
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/95/d3/658ef44efce51eee7637db691c018c131a0a8a6692fbfb356b7b840194f4/hg-evolve-11.1.4.tar.gz",
+            "sha256": "629876836e787d29cf55f8269267914aa966b147c780ffb0a8dd061cb215ff07"
+        }
+    ]
+}

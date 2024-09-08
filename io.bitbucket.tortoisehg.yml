@@ -1,0 +1,68 @@
+app-id: io.bitbucket.tortoisehg
+
+runtime: org.kde.Platform
+runtime-version: 6.7
+sdk: org.kde.Sdk
+
+base: com.riverbankcomputing.PyQt.BaseApp
+base-version: 6.7
+
+command: thg
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+build-options:
+  env:
+    - BASEAPP_REMOVE_PYWEBENGINE=1
+    
+finish-args:
+  - --device=dri
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=ssh-auth
+  - --share=network
+  - --share=ipc
+  - --filesystem=home:rw
+  # For external differs
+  - --talk-name=org.freedesktop.Flatpak
+  # For external differs
+  - --filesystem=/tmp
+
+modules:
+  # https://github.com/flathub/org.qgis.qgis/blob/master/org.qgis.qgis.json (just changed to Qt6)
+  - name: qscintilla
+    buildsystem: simple
+    sources:
+    - type: archive
+      url: https://www.riverbankcomputing.com/static/Downloads/QScintilla/2.14.1/QScintilla_src-2.14.1.tar.gz
+      sha256: dfe13c6acc9d85dfcba76ccc8061e71a223957a6c02f3c343b30a9d43a4cdd4d
+    build-commands:
+      - "sed -e 's|\\(target.path\\) = .*|\\1 = /app/lib|' -i src/qscintilla.pro"
+      - "sed -e 's|\\(header.path\\) = .*|\\1 = /app/include|' -i src/qscintilla.pro"
+      - "sed -e 's|\\(trans.path\\) = .*|\\1 = /app/share/qt/translations|' -i src/qscintilla.pro"
+      - "sed -e 's|\\(qsci.path\\) = .*|\\1 = /app/share/qt|' -i src/qscintilla.pro"
+      - "sed -e 's|\\(features.path\\) = .*|\\1 = /app/lib/qt/mkspecs/features|' -i src/qscintilla.pro"
+      - "cd src/ && QMAKEFEATURES=$PWD/src/features/ qmake && qmake -set prefix /app && make -j ${FLATPAK_BUILDER_N_JOBS:-`nproc`} && PREFIX=/app DESTDIR=/banana make install"
+      - "cd Python && mv pyproject{-qt6,}.toml && sip-build --no-make --qsci-features-dir ../src/features --qsci-include-dir ../src --qsci-library-dir ../src --api-dir /app/share/qt/qsci/api/python --target-dir=/app/lib/python3.11/site-packages && make -C build -j ${FLATPAK_BUILDER_N_JOBS:-`nproc`} && make -C build install"
+  # Generated with "./flatpak-pip-generator mercurial\<6.7"
+  - python3-mercurial.json
+  # Generated with "./flatpak-pip-generator hg-evolve"
+  - python3-hg-evolve.json
+  # Generated with "./flatpak-pip-generator iniparse"
+  - python3-iniparse.json
+  - name: tortoisehg
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=${FLATPAK_DEST} .
+    sources:
+      - type: archive
+        url: https://www.mercurial-scm.org/release/tortoisehg/targz/tortoisehg-6.6.3.tar.gz
+        sha256: f69835379ba3d596990809b837cb684707d51e67bb9c0b0d319917491805bdeb
+      - type: file
+        path: io.bitbucket.tortoisehg.metainfo.xml
+    post-install:
+      - (cd icons && find . -type f -exec install -Dm 755 "{}" "${FLATPAK_DEST}/share/icons/hicolor/{}" \;)
+      - install -Dm644 icons/svg/thg_logo.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - sed -e "s|Icon=thg_logo|Icon=${FLATPAK_ID}|g" contrib/thg.desktop > ${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
