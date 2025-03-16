@@ -1,0 +1,9 @@
+# Install prerequisites
+```
+flatpak install --user flathub org.kde.Platform//6.7 org.kde.Sdk//6.8 flathub com.riverbankcomputing.PyQt.BaseApp//6.7 flathub org.flatpak.Builder
+```
+# Build and install (using the flatpak version of flatpak-builder)
+```
+flatpak run org.flatpak.Builder --disable-rofiles-fuse --force-clean build-dir io.bitbucket.tortoisehg.yml
+flatpak run org.flatpak.Builder --user --install --force-clean build-dir io.bitbucket.tortoisehg.yml
+```
