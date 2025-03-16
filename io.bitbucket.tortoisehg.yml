@@ -44,7 +44,7 @@ modules:
       - "sed -e 's|\\(features.path\\) = .*|\\1 = /app/lib/qt/mkspecs/features|' -i src/qscintilla.pro"
       - "cd src/ && QMAKEFEATURES=$PWD/src/features/ qmake && qmake -set prefix /app && make -j ${FLATPAK_BUILDER_N_JOBS:-`nproc`} && PREFIX=/app DESTDIR=/banana make install"
       - "cd Python && mv pyproject{-qt6,}.toml && sip-build --no-make --qsci-features-dir ../src/features --qsci-include-dir ../src --qsci-library-dir ../src --api-dir /app/share/qt/qsci/api/python --target-dir=/app/lib/python3.11/site-packages && make -C build -j ${FLATPAK_BUILDER_N_JOBS:-`nproc`} && make -C build install"
-  # Generated with "./flatpak-pip-generator mercurial\<6.7"
+  # Generated with "./flatpak-pip-generator mercurial\<6.10"
   - python3-mercurial.json
   # Generated with "./flatpak-pip-generator hg-evolve"
   - python3-hg-evolve.json
@@ -56,8 +56,8 @@ modules:
       - pip3 install --prefix=${FLATPAK_DEST} .
     sources:
       - type: archive
-        url: https://www.mercurial-scm.org/release/tortoisehg/targz/tortoisehg-6.6.3.tar.gz
-        sha256: f69835379ba3d596990809b837cb684707d51e67bb9c0b0d319917491805bdeb
+        url: https://www.mercurial-scm.org/release/tortoisehg/targz/tortoisehg-6.9.tar.gz
+        sha256: 8fe1ee02afde9675c83a85f87a8a8c78ec86ab7aa36dda09c3aa5c66c49af802
       - type: file
         path: io.bitbucket.tortoisehg.metainfo.xml
     post-install:

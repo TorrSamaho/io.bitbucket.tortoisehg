@@ -7,8 +7,8 @@
     "sources": [
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/95/d3/658ef44efce51eee7637db691c018c131a0a8a6692fbfb356b7b840194f4/hg-evolve-11.1.4.tar.gz",
-            "sha256": "629876836e787d29cf55f8269267914aa966b147c780ffb0a8dd061cb215ff07"
+            "url": "https://files.pythonhosted.org/packages/e1/ba/3f188b6a7ad88db24b4dcb5f50a43596742a63102d55cfb7775b4c3fddc3/hg_evolve-11.1.8-py3-none-any.whl",
+            "sha256": "7cd9b7c30193765b66bf5f237faece8010c905bf3a4b554aabaf8650a1964e41"
         }
     ]
 }
