@@ -1,6 +1,6 @@
 # Install prerequisites
 ```
-flatpak install --user flathub org.kde.Platform//6.7 org.kde.Sdk//6.7 flathub com.riverbankcomputing.PyQt.BaseApp//6.7 flathub org.flatpak.Builder
+flatpak install --user flathub org.kde.Platform//6.8 org.kde.Sdk//6.8 flathub com.riverbankcomputing.PyQt.BaseApp//6.8 flathub org.flatpak.Builder
 ```
 # Build and install (using the flatpak version of flatpak-builder)
 ```
