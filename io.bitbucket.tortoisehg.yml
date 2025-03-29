@@ -1,11 +1,11 @@
 app-id: io.bitbucket.tortoisehg
 
 runtime: org.kde.Platform
-runtime-version: 6.7
+runtime-version: "6.8"
 sdk: org.kde.Sdk
 
 base: com.riverbankcomputing.PyQt.BaseApp
-base-version: 6.7
+base-version: "6.8"
 
 command: thg
 
@@ -29,21 +29,19 @@ finish-args:
   - --filesystem=/tmp
 
 modules:
-  # https://github.com/flathub/org.qgis.qgis/blob/master/org.qgis.qgis.json (just changed to Qt6)
-  - name: qscintilla
+  # https://github.com/flathub/page.codeberg.JakobDev.jdTextEdit/blob/master/page.codeberg.JakobDev.jdTextEdit.yaml
+  - name: qscintilla-pyqt6
     buildsystem: simple
-    sources:
-    - type: archive
-      url: https://www.riverbankcomputing.com/static/Downloads/QScintilla/2.14.1/QScintilla_src-2.14.1.tar.gz
-      sha256: dfe13c6acc9d85dfcba76ccc8061e71a223957a6c02f3c343b30a9d43a4cdd4d
     build-commands:
-      - "sed -e 's|\\(target.path\\) = .*|\\1 = /app/lib|' -i src/qscintilla.pro"
-      - "sed -e 's|\\(header.path\\) = .*|\\1 = /app/include|' -i src/qscintilla.pro"
-      - "sed -e 's|\\(trans.path\\) = .*|\\1 = /app/share/qt/translations|' -i src/qscintilla.pro"
-      - "sed -e 's|\\(qsci.path\\) = .*|\\1 = /app/share/qt|' -i src/qscintilla.pro"
-      - "sed -e 's|\\(features.path\\) = .*|\\1 = /app/lib/qt/mkspecs/features|' -i src/qscintilla.pro"
-      - "cd src/ && QMAKEFEATURES=$PWD/src/features/ qmake && qmake -set prefix /app && make -j ${FLATPAK_BUILDER_N_JOBS:-`nproc`} && PREFIX=/app DESTDIR=/banana make install"
-      - "cd Python && mv pyproject{-qt6,}.toml && sip-build --no-make --qsci-features-dir ../src/features --qsci-include-dir ../src --qsci-library-dir ../src --api-dir /app/share/qt/qsci/api/python --target-dir=/app/lib/python3.11/site-packages && make -C build -j ${FLATPAK_BUILDER_N_JOBS:-`nproc`} && make -C build install"
+      - sip-install --target-dir=/app/lib/python/site-packages/ --verbose --debug
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/e8/06/799c04a51f6cc2111f0cfb090ed4938fc044c5c12d1d9671280e235f2f2e/PyQt6_QScintilla-2.14.1.tar.gz
+        sha256: 8849a4a9847bbf3698d0c1cf47e6d08552a49a66928543a73f10d6dcba617d10
+        x-checker-data:
+          type: pypi
+          name: PyQt6-QScintilla
+          packagetype: sdist
   # Generated with "./flatpak-pip-generator mercurial\<6.10"
   - python3-mercurial.json
   # Generated with "./flatpak-pip-generator hg-evolve"
