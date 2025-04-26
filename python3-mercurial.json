@@ -2,13 +2,13 @@
     "name": "python3-mercurial",
     "buildsystem": "simple",
     "build-commands": [
-        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"mercurial<6.10\" --no-build-isolation"
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"mercurial<7.1\" --no-build-isolation"
     ],
     "sources": [
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/df/5b/7038f46625c830e9c71d1eb57faaf4821b60487749b24f140e91a012e51e/mercurial-6.9.3.tar.gz",
-            "sha256": "dd1e7f9434fee1b059d10df6c2dd0d7218c941fbd137c1f16e09847409bc0105"
+            "url": "https://files.pythonhosted.org/packages/c9/dd/6c32d8e8a7d74d9b890ab5e91f66e6830b93b3a76417886d1ea7c275b2e1/mercurial-7.0.1.tar.gz",
+            "sha256": "0f4cde42ec6c15f7ff93d421e7a842fdb30ee7951b1dbc4aacaac06eac764b48"
         }
     ]
 }
